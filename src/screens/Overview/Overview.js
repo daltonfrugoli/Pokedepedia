@@ -15,6 +15,7 @@ import { styles } from './Overview.style'
 import { Header } from '../../components/Header/Header';
 import { NavigationBar } from '../../components/NavigationBar/NavigationBar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { GetPokeEvo } from "../../services/Https"; 
 
 export function Overview({navigation, route}) {
 
@@ -45,10 +46,11 @@ export function Overview({navigation, route}) {
 
         return () => subscription?.remove();
 
-
+        
     });
 
-    const tipos = [
+    const tipos = route.params.data.types
+    /*[
         {
             id: 1,
             name: 'plant'
@@ -57,26 +59,109 @@ export function Overview({navigation, route}) {
             id: 2,
             name: 'poison'
         },
-    ]
+    ]*/
 
     const renderItem = (item, index) => {
         
-        var cor = item.item.name
+        var cor = item.item.type.name
+        var typeColors 
+
+        switch (cor) {
+            case 'normal': 
+                typeColors = '#A7A7A7'
+                break;
+
+            case 'grass':
+                typeColors = '#43C825'
+                break;
+
+            case 'fire': 
+                typeColors = '#DF8110'
+                break;
+
+            case 'water':
+                typeColors = '#0C82B5'
+                break;
+
+            case 'flying':
+                typeColors = '#0FDA8D'
+                break;
+
+            case 'fighting':
+                typeColors = '#CF530C'
+                break;
+
+            case 'poison':
+                typeColors = '#C955E6' 
+                break;
+
+            case 'eletric':
+                typeColors = '#E7E31C'
+                break;
+
+            case 'ground': 
+                typeColors = '#805F10'
+                break;
+
+            case 'rock':
+                typeColors = '#A4A70E'
+                break;
+
+            case 'psychic':
+                typeColors = '#FC528D'
+                break;
+
+            case 'ice':
+                typeColors = '#2FD1F1'
+                break;
+
+            case 'bug':
+                typeColors = '#359741'
+                break;
+
+            case 'ghost':
+                typeColors = '#B052AD'
+                break;
+
+            case 'steel':
+                typeColors = '#ABABAB'
+                break;
+
+            case 'dragon': 
+                typeColors = '#FA5656'
+                break
+
+            case 'dark': 
+                typeColors = '#747474'
+                break;
+
+            case 'fairy':
+                typeColors = '#FF93E0'
+                break;
+        
+            default:
+                typeColors = '#A7A7A7'
+                break;
+        }
+
+
         return(
             <View style={{
                 borderRadius: 8,
+                borderWidth: 2,
+                borderColor: '#000000',
                 alignItems: 'center',
                 justifyContent: 'center',
                 paddingHorizontal: 10,
                 paddingVertical: 2,
-                backgroundColor: cor == 'poison'? '#3985F8': '#F5C30E',
+                backgroundColor: typeColors,
                 marginRight: 15
             }}>
                 <Text style={{
                     fontSize: 25,
                     fontFamily: 'Bebas Neue',
                     color: '#000000'
-                }}>{item.item.name}</Text>
+                }}>{item.item.type.name}</Text>
             </View>
         )
     }
@@ -111,7 +196,7 @@ export function Overview({navigation, route}) {
                                     }else{
                                         setFavorited(true)
                                     }
-                                    console.log(route.params.data.height)
+                                    console.log(route.params.data.types)
                                 }}
                             >
                                 <Ionicons style={[ styles.favIcon, { color: favorited? '#FFCD02' : '#ffffff' }]} name="star"/>
@@ -155,7 +240,7 @@ export function Overview({navigation, route}) {
                             horizontal = {true}
                             contentContainerStyle = {{ marginBottom: 30, marginTop: 10, marginLeft: dimensions.window.width*0.07, paddingRight: dimensions.window.width*0.10}}
                             data = {tipos}
-                            keyExtractor = {item => item.id}
+                            keyExtractor = {item => item.slot}
                             renderItem = {renderItem}
                         />
                     </View>   
