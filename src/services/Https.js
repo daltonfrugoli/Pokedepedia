@@ -3,7 +3,7 @@ import api from "./Api";
 export async function GetPokeInfo(pokeName){
 
     try{
-        const response = await api.get(pokeName)
+        const response = await api.get('pokemon/' + pokeName)
        
         return response 
     }
@@ -16,7 +16,20 @@ export async function GetPokeInfo(pokeName){
 export async function GetPokenames(){
 
     try{
-        const response = await api.get()
+        const response = await api.get('pokemon?limit=100000&offset=0')
+       
+        return response 
+    }
+
+    catch(error){
+        return error
+    }
+} 
+
+export async function GetPokeEvo(pokeId){
+
+    try{
+        const response = await api.get('evolution-chain/' + pokeId + '/')
        
         return response 
     }

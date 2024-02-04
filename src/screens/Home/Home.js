@@ -112,6 +112,7 @@ export function Home({navigation, route}) {
                                     .then((res) => {
                                         if(res.data != null){
                                             navigation.navigate('Overview', { data: res.data })
+                                            console.log(res.data )
                                         }
                                     
                                         setTimeout(() => {
