@@ -175,7 +175,7 @@ export function Favorites({navigation, route}) {
                         <Text style={ styles.propsText }>HEIGHT: {item.height}m</Text>
                     </View>
                 </View>
-                <View style={{ marginVertical: 15, flexDirection: 'row', alignItems: 'center', width: '85%', alignSelf: 'center' }}>
+                <View style={{ marginTop: 15, marginBottom: 20, flexDirection: 'row', alignItems: 'center', width: '85%', alignSelf: 'center' }}>
                     <View style={ styles.propsBox }>
                         <View style={ styles.propsDot }/>
                         <Text style={ styles.propsText }>Types:</Text>
@@ -187,8 +187,7 @@ export function Favorites({navigation, route}) {
                         keyExtractor = {item => item.slot}
                         renderItem = {renderType}
                     />
-                </View>
-                
+                </View>  
             </View>
         )
     }
