@@ -45,15 +45,13 @@ export function Home({navigation, route}) {
             console.log(error.error)
         })
         
-        console.log('rodou aqui')
-        
     }, [isFocused])
     
 
 
 
     return(
-        <SafeAreaView style={{ flex: 1, backgroundColor: '#D62A2A', margin:0 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: '#D62A2A'}}>
             <ScrollView>
                 <Header/>
                 <View style={ styles.displayContainer }>
@@ -97,7 +95,6 @@ export function Home({navigation, route}) {
                             selectedRowStyle={{ backgroundColor: '#888888' }}
                             showsVerticalScrollIndicator={ true }
                             onSelect={(selectedItem, index) => {
-                                console.log(selectedItem, index)
                                 setPokemonName(selectedItem)
                             }}
                             search
@@ -112,7 +109,6 @@ export function Home({navigation, route}) {
                                     .then((res) => {
                                         if(res.data != null){
                                             navigation.navigate('Overview', { data: res.data })
-                                            console.log(res.data )
                                         }
                                     
                                         setTimeout(() => {

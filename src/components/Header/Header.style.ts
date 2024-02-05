@@ -37,11 +37,9 @@ export const styles = StyleSheet.create({
         borderWidth: 2,
         marginHorizontal: 2
     },
-    headerAnimation: {
-        justifyContent: 'center',
-        alignItems: 'center',      
-        left: 0,
-        right: 0,
-        paddingTop: 10         
-      }
+    title: {
+        color: '#FFCD02',
+        fontFamily: '04b',
+        fontSize: 20
+    }
 })

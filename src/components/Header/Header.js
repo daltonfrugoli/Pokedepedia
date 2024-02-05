@@ -11,7 +11,7 @@ import { styles } from './Header.style'
 
 
 
-export const Header = () => {
+export const Header = (props) => {
 
     return(
 
@@ -28,6 +28,8 @@ export const Header = () => {
                 <View style={[ styles.colorCircle, { backgroundColor: '#DB2F6D', marginLeft: 10 }]}/>
                 <View style={[ styles.colorCircle, { backgroundColor: '#FFCD02'}]}/>
                 <View style={[ styles.colorCircle, { backgroundColor: '#2FDB41'}]}/>
+                <View style={{ flex: 1 }}/>
+                <Text style={ styles.title }>{props.title}</Text>
             </View>
         </View>    
 
