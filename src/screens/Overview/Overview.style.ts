@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     displayContainer: {
         width: '89%',
-        height: 260,
+        height: 280,
         backgroundColor: '#d9d9d9',
         borderRadius: 10,
         alignSelf: 'center',
@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     },
     display: {
         width: '90%',
-        height: 185,
+        height: 205,
         backgroundColor: '#ffffff',
         alignSelf: 'center',
         alignItems: 'center',
@@ -21,8 +21,8 @@ export const styles = StyleSheet.create({
         borderRadius: 10
     },
     displayImage: {
-        width: 330,
-        height: 165
+        width: '80%',
+        height: '100%'
     },
     underDisplay: {
         width: '90%',

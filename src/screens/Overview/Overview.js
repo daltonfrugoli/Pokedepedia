@@ -15,16 +15,15 @@ import { styles } from './Overview.style'
 import { Header } from '../../components/Header/Header';
 import { NavigationBar } from '../../components/NavigationBar/NavigationBar';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { GetPokeEvo } from "../../services/Https"; 
+import { db } from "../../App.js";
 
 export function Overview({navigation, route}) {
 
-    var teste = route.params.data
-    var types = teste.types
-    var fotoLink = teste.sprites.front_default.toString()
-    
 
-    const [favorited, setFavorited] = useState(false)
+    const pokeInfo = route.params.data
+    const photoLink = pokeInfo.sprites.front_default.toString()
+
+    const [favorited, setFavorited] = useState()
     
     const windowDimensions = Dimensions.get('window');
     const screenDimensions = Dimensions.get('screen');
@@ -36,6 +35,23 @@ export function Overview({navigation, route}) {
     });
 
     useEffect(() => {
+
+        db.transaction((qr) => {
+            qr.executeSql(
+                "SELECT * FROM favPokemons WHERE id = ?",
+                [pokeInfo.id],
+                (_, results) => {
+                    console.log(results)
+
+                    if(results.rows.length > 0){
+                        setFavorited(true)
+                    } else {
+                        setFavorited(false)
+                    } 
+                }
+            )
+        })
+
         const subscription = Dimensions.addEventListener(
             'change',
             ({window, screen}) => {
@@ -44,27 +60,17 @@ export function Overview({navigation, route}) {
             },
         );
 
-        return () => subscription?.remove();
-
-        
+        return () => subscription?.remove();  
     });
 
-    const tipos = route.params.data.types
-    /*[
-        {
-            id: 1,
-            name: 'plant'
-        },
-        {
-            id: 2,
-            name: 'poison'
-        },
-    ]*/
+    const types = pokeInfo.types
 
     const renderItem = (item, index) => {
         
         var cor = item.item.type.name
-        var typeColors 
+
+
+        var typeColors = ''
 
         switch (cor) {
             case 'normal': 
@@ -166,7 +172,7 @@ export function Overview({navigation, route}) {
         )
     }
 
-    let numero = route.params.data.order;
+    let numero = pokeInfo.order;
     let numeroFormatado = numero.toString().padStart(4, '0');
     
 
@@ -179,7 +185,7 @@ export function Overview({navigation, route}) {
                         <View style={ styles.display }>
                             <Image 
                                 style={ styles.displayImage }
-                                source={{uri: fotoLink}}
+                                source={{uri: photoLink}}
                             />
                         </View>
                         <View style={ styles.underDisplay }>
@@ -191,12 +197,39 @@ export function Overview({navigation, route}) {
                             <TouchableOpacity 
                                 style={ styles.favButton }
                                 onPress={() => {
-                                    if(favorited){
-                                        setFavorited(false)
-                                    }else{
-                                        setFavorited(true)
-                                    }
-                                    console.log(route.params.data.types)
+                                    db.transaction((qr) => {
+                                        qr.executeSql(
+                                            "SELECT * FROM favPokemons WHERE id = ?",
+                                            [pokeInfo.id],
+                                            (qr2, results) => {
+                                                console.log(results)
+                                                
+                                                if(results.rows.length > 0){
+                                                    qr2.executeSql(
+                                                        "DELETE FROM favPokemons WHERE id = ?",
+                                                        [pokeInfo.id]
+                                                    )
+                                                    setFavorited(false)
+                                                } else {
+                                                    qr2.executeSql(
+                                                        "INSERT INTO favPokemons (id, orderNum, name, weight, height, types) VALUES (?, ?, ?, ?, ?, ?)",
+                                                        [pokeInfo.id, numeroFormatado, pokeInfo.name, pokeInfo.weight / 10, pokeInfo.height / 10, JSON.stringify(pokeInfo.types)]
+                                                    )
+                                                    setFavorited(true)
+                                                } 
+                                                
+                                            }
+                                        )
+                                    });
+                                    
+                                    
+                                   /* db.transaction((qr) => {
+                                        qr.executeSql(
+                                            "SELECT id FROM favPokemons",
+                                            [],
+                                            (_, results) => { console.log(results.rows.raw()) } 
+                                        )
+                                    })*/
                                 }}
                             >
                                 <Ionicons style={[ styles.favIcon, { color: favorited? '#FFCD02' : '#ffffff' }]} name="star"/>
@@ -215,31 +248,30 @@ export function Overview({navigation, route}) {
                             right: '50%'
                         }}/>
                         <View style={{ alignItems: 'center', flex: 1 }}>
-                            <Text style={ styles.tagNameText }>{route.params.data.name}</Text>
+                            <Text style={ styles.tagNameText }>{pokeInfo.name}</Text>
                         </View>
                     </View>
                     <View style={{ marginTop: 20, flexDirection: 'row', justifyContent: 'space-between', width: '85%', alignSelf: 'center' }}>
                         <View style={ styles.propsBox }>
                             <View style={ styles.propsDot }/>
-                            <Text style={ styles.propsText }>WEIGHT: {route.params.data.weight}kg</Text>
+                            <Text style={ styles.propsText }>WEIGHT: { pokeInfo.weight / 10 }kg</Text>
                         </View>
                         <View style={ styles.propsBox }>
                             <View style={ styles.propsDot }/>
-                            <Text style={ styles.propsText }>HEIGHT: {route.params.data.height}m</Text>
+                            <Text style={ styles.propsText }>HEIGHT: { pokeInfo.height / 10 }m</Text>
                         </View>
                     </View>
                     <View style={{ marginTop: 20, justifyContent: 'space-between', width: '85%', alignSelf: 'center' }}>
                         <View style={ styles.propsBox }>
                             <View style={ styles.propsDot }/>
                             <Text style={ styles.propsText }>TYPE:</Text>
-                        </View>  
-                          
+                        </View>     
                     </View>    
                     <View>     
                         <FlatList
                             horizontal = {true}
-                            contentContainerStyle = {{ marginBottom: 30, marginTop: 10, marginLeft: dimensions.window.width*0.07, paddingRight: dimensions.window.width*0.10}}
-                            data = {tipos}
+                            contentContainerStyle = {{ marginBottom: 30, marginTop: 10, marginLeft: dimensions.window.width*0.07}}
+                            data = {types}
                             keyExtractor = {item => item.slot}
                             renderItem = {renderItem}
                         />
