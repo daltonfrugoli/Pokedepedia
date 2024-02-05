@@ -55,8 +55,8 @@ export function Overview({navigation, route}) {
         const subscription = Dimensions.addEventListener(
             'change',
             ({window, screen}) => {
-            setDimensions({window, screen});
-            console.log(window.width)
+                setDimensions({window, screen});
+                console.log(window.width)
             },
         );
 
@@ -171,12 +171,9 @@ export function Overview({navigation, route}) {
             </View>
         )
     }
-
-    let numero = pokeInfo.order;
-    let numeroFormatado = numero.toString().padStart(4, '0');
-    
-
-    
+  
+    let numeroFormatado = pokeInfo.game_indices[3].game_index.toString().padStart(4, '0');
+     
     return(
         <SafeAreaView style={{ flex: 1, backgroundColor: '#D62A2A', margin:0 }}>
             <ScrollView>
