@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     displayContainer: {
-        width: '89%',
+        width: '90%',
         height: 280,
         backgroundColor: '#d9d9d9',
         borderRadius: 10,
@@ -49,22 +49,41 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',  
         marginBottom: 3,
-        marginRight: 2
+        marginRight: 2,
+        elevation: 4
     },
     favIcon: {
         fontSize: 22,
         marginBottom: 2,
+        color:'#ffffff'
     },
     tag: {
-        width: '89%',
+        width: '90%',
         height: 70,
-        backgroundColor: '#302E82',
+        backgroundColor: '#1E1D52',
         alignSelf: 'center',
         borderRadius: 10,
-        marginTop: 20,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-evenly'
+        marginTop: 25,
+        flexDirection: 'row', 
+        position: "absolute"
+    },
+    tagBack: {
+        width: '90%',
+        height: 70,
+        backgroundColor: '#18173A',
+        alignSelf: 'center',
+        borderRadius: 10,
+        marginTop: 20
+    },
+    tagOver: {
+        width: '90%',
+        height: 70,
+        alignSelf: 'center',
+        borderRadius: 10,
+        marginTop: 25,
+        flexDirection: 'row', 
+        position: "absolute",
+        alignItems: 'center'
     },
     tagNumberText: {
         fontFamily: '04b',

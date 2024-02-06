@@ -53,7 +53,7 @@ export function Home({navigation, route}) {
     return(
         <SafeAreaView style={{ flex: 1, backgroundColor: '#D62A2A'}}>
             <ScrollView>
-                <Header/>
+                <Header modal={ true }/>
                 <View style={ styles.displayContainer }>
                     <View style={ styles.display }>
                         <Image 
@@ -129,8 +129,8 @@ export function Home({navigation, route}) {
                     </View>
                 </View>
                 <View style={{ height: 20 }}/>
-            </ScrollView> 
-            <NavigationBar/>
+            </ScrollView>
+            <NavigationBar screen={ 'HOME' }/>
             <Spinner visible={ spinnerIsVisible }/>
         </SafeAreaView>
     )
