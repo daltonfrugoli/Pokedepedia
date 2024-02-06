@@ -213,7 +213,7 @@ export function Favorites({navigation, route}) {
                 />
                 }
             </View>
-            <NavigationBar></NavigationBar>
+            <NavigationBar screen={ 'FAVORITES' }/>
         </SafeAreaView>
     )
 }

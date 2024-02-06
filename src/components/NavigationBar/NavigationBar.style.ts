@@ -11,7 +11,8 @@ export const styles = StyleSheet.create({
         alignSelf: 'center',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginVertical: 10
+        marginTop: 10,
+        marginBottom: 15
     },
     button: {
         width: 180,
@@ -19,10 +20,15 @@ export const styles = StyleSheet.create({
         backgroundColor: '#222222',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 8,
+        borderRadius: 8
     },
-    buttonIcon: {
-        color: '#ffffff',
-        fontSize: 25
+    buttonBack: {
+        position: 'absolute', 
+        width: 180,
+        height: 45,
+        backgroundColor: '#000000',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 8
     }
 })

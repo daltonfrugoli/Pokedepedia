@@ -10,13 +10,14 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from "@react-navigation/native";
 
 
-export const NavigationBar = () => {
+export const NavigationBar = (props) => {
 
     const navigation = useNavigation()
 
     return(
         <View style={ styles.navigationBarContainer }>
             <View style={ styles.navigationBarMargin }>
+                <View style={ styles.buttonBack }/>
                 <TouchableOpacity 
                     style={ styles.button }
                     onPress={() => {
@@ -24,8 +25,15 @@ export const NavigationBar = () => {
                         console.log('home')
                     }}
                 >
-                    <Ionicons style={ styles.buttonIcon } name="home"/>
+                    <Ionicons   
+                        style={{
+                            color: props.screen == 'HOME' ? '#ffCD02' : '#ffffff',
+                            fontSize: 25     
+                        }} 
+                        name="home"
+                    />
                 </TouchableOpacity>
+                <View style={[ styles.buttonBack, { right: 0 }]}/>
                 <TouchableOpacity 
                     style={ styles.button }
                     onPress={() => {
@@ -33,7 +41,13 @@ export const NavigationBar = () => {
                         console.log('favorites')
                     }}
                 >
-                    <Ionicons style={ styles.buttonIcon } name="star"/>
+                    <Ionicons   
+                        style={{
+                            color: props.screen == 'FAVORITES' ? '#ffCD02' : '#ffffff',
+                            fontSize: 25     
+                        }} 
+                        name="star"
+                    />
                 </TouchableOpacity>
             </View>
         </View>
