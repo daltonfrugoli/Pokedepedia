@@ -14,26 +14,30 @@ import { styles } from './Overview.style'
 import { Header } from '../../components/Header/Header';
 import { NavigationBar } from '../../components/NavigationBar/NavigationBar';
 import { db } from "../../App.js";
-import { Canvas, Group, vec, Line, RoundedRect, LinearGradient, Circle, Image, useImage, ImageShader, Rect, Skia, Shader, BlurMask } from "@shopify/react-native-skia";
+import { Canvas, Group, vec, Line, RoundedRect, LinearGradient, Image, useImage, ImageShader, BlurMask } from "@shopify/react-native-skia";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
 export function Overview({navigation, route}) {
 
-    
-    const landscape = useImage(require('../../assets/images/pokeLandscape.jpg'))
-
-
+    //infos gerais do pokemon
     const pokeInfo = route.params.data
-    const photoLink = pokeInfo.sprites.front_default.toString()
-    const pokeImage = useImage(pokeInfo.sprites.front_default.toString())
 
+
+    //imagem de fundo e front_default pokemon
+    const landscape = useImage(require('../../assets/images/pokeLandscape.jpg'))
+    const pokePhotoLink = useImage(pokeInfo.sprites.front_default.toString())
+    const [pokePhoto, setPokePhoto] = useState()
+  
+    //botão de favoritos
     const [favorited, setFavorited] = useState()
+
+    //Numeração do pokemon
+    const [formatNumber, setFormatNumber] = useState(pokeInfo.id.toString().padStart(4, '0'))
     
+    //variaveis que se atualizam com o valor da width e heigth da tela
     const windowDimensions = Dimensions.get('window');
     const screenDimensions = Dimensions.get('screen');
-    
-    
     const [dimensions, setDimensions] = useState({
         window: windowDimensions,
         screen: screenDimensions,
@@ -41,13 +45,13 @@ export function Overview({navigation, route}) {
 
     useEffect(() => {
 
+        setPokePhoto(pokePhotoLink)
+
         db.transaction((qr) => {
             qr.executeSql(
                 "SELECT * FROM favPokemons WHERE id = ?",
                 [pokeInfo.id],
                 (_, results) => {
-                    console.log(results)
-
                     if(results.rows.length > 0){
                         setFavorited(true)
                     } else {
@@ -106,7 +110,7 @@ export function Overview({navigation, route}) {
                 typeColors = '#C955E6' 
                 break;
 
-            case 'eletric':
+            case 'electric':
                 typeColors = '#E7E31C'
                 break;
 
@@ -177,7 +181,7 @@ export function Overview({navigation, route}) {
         )
     }
   
-    let numeroFormatado = pokeInfo.game_indices[3].game_index.toString().padStart(4, '0');
+    
      
     return(
         <SafeAreaView style={{ flex: 1, backgroundColor: '#D62A2A', margin:0 }}>
@@ -227,7 +231,7 @@ export function Overview({navigation, route}) {
                                         rect={{ x: 0, y: 0, width: dimensions.window.width, height: 255 }}
                                     />
                                 </RoundedRect>
-                                <Image image={pokeImage} y={40} fit="fitHeight" height={205} width={dimensions.window.width}></Image>
+                                <Image image={pokePhoto} y={40} fit="fitHeight" height={205} width={dimensions.window.width}></Image>
                             </Group>
                         </Group>
                     </Canvas>
@@ -260,7 +264,7 @@ export function Overview({navigation, route}) {
                                                 } else {
                                                     qr2.executeSql(
                                                         "INSERT INTO favPokemons (id, orderNum, name, weight, height, types) VALUES (?, ?, ?, ?, ?, ?)",
-                                                        [pokeInfo.id, numeroFormatado, pokeInfo.name, pokeInfo.weight / 10, pokeInfo.height / 10, JSON.stringify(pokeInfo.types)]
+                                                        [pokeInfo.id, formatNumber, pokeInfo.name, pokeInfo.weight / 10, pokeInfo.height / 10, JSON.stringify(pokeInfo.types)]
                                                     )
                                                     setFavorited(true)
                                                 } 
@@ -277,14 +281,6 @@ export function Overview({navigation, route}) {
                 </View>
                 
             </View>
-
-
-
-
-
-
-
-
 
             <View>
                 <View style={ styles.tagBack }/>
@@ -332,7 +328,7 @@ export function Overview({navigation, route}) {
                 </View>
                 <View style={ styles.tagOver }>
                     <View style={{ alignItems: 'center', flex: 1 }}>
-                        <Text style={ styles.tagNumberText }>#{numeroFormatado}</Text>
+                        <Text style={ styles.tagNumberText }>#{formatNumber}</Text>
                     </View>
                     <View style={{ 
                         height: 20, 
@@ -346,40 +342,7 @@ export function Overview({navigation, route}) {
                     </View> 
                 </View>
             </View>
-                    {/*<View style={ styles.tag }>
-                        <View style={{ alignItems: 'center', flex: 1 }}>
-                            <Text style={ styles.tagNumberText }>#{numeroFormatado}</Text>
-                        </View>
-                        <View style={{ 
-                            height: 20, 
-                            borderWidth: 2, 
-                            borderColor: 'white',
-                            position: 'absolute',
-                            right: '50%'
-                        }}/>
-                        <View style={{ alignItems: 'center', flex: 1 }}>
-                            <Text style={ styles.tagNameText }>{pokeInfo.name}</Text>
-                        </View>
-                       
-                    </View>*/}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
 
                     <View style={{ marginTop: 20, flexDirection: 'row', justifyContent: 'space-between', width: '85%', alignSelf: 'center' }}>
                         <View style={ styles.propsBox }>
