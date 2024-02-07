@@ -104,7 +104,7 @@ export function Home({navigation, route}) {
                             style={ styles.searchButton }
                             onPress={() => {
                                 if(pokemonName != ''){
-                                    setSpinnerIsVisible(true)
+                                    //setSpinnerIsVisible(true)
                                     GetPokeInfo(pokemonName)
                                     .then((res) => {
                                         if(res.data != null){
