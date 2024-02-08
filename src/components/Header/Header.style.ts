@@ -2,22 +2,19 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     headerContainer: {
-        backgroundColor: '#A32323',
         width: '100%',
         height: 60,
-        borderBottomColor: '#6C0D0D',
-        borderBottomWidth: 4,
-        alignItems: 'center',
-        justifyContent: 'center'
+        position: 'absolute',
+        top: 12,
+        left: 15
     },
     buttonsMargin: {
         width: '90%',
         flexDirection: 'row',
-        alignItems: 'center'
     },
     blueButton: {
-        width: 40,
-        height: 40,
+        width: 50,
+        height: 50,
         backgroundColor: '#3985F8',
         borderRadius: 30,
         borderColor: '#ffffff',
@@ -35,7 +32,7 @@ export const styles = StyleSheet.create({
         borderRadius: 10,
         borderColor: '#000000',
         borderWidth: 2,
-        marginHorizontal: 2
+        marginHorizontal: 4
     },
     title: {
         color: '#FFCD02',
