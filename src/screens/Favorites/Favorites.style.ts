@@ -22,6 +22,28 @@ export const styles = StyleSheet.create({
         color: '#ffffff',
         fontSize: 24
     },
+    tagDivLine: { 
+        height: 20, 
+        borderWidth: 2, 
+        borderColor: 'white',
+        position: 'absolute',
+        right: '50%'
+    },
+    upperPropsRow: {
+        marginTop: 20, 
+        flexDirection: 'row', 
+        justifyContent: 'space-between', 
+        width: '85%', 
+        alignSelf: 'center'
+    },
+    underPropsRow: {
+        marginTop: 15, 
+        marginBottom: 20, 
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        width: '85%', 
+        alignSelf: 'center'
+    },
     propsDot: {
         backgroundColor: '#ffffff',
         width: 8,

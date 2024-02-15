@@ -5,16 +5,16 @@ export const styles = StyleSheet.create({
         width: '100%',
         height: 60,
         position: 'absolute',
-        top: 12,
-        left: 15
+        top: 12
     },
     buttonsMargin: {
-        width: '90%',
-        flexDirection: 'row',
+        width: '100%',
+        flexDirection: 'row'
     },
     blueButton: {
         width: 50,
         height: 50,
+        marginLeft: 15, 
         backgroundColor: '#3985F8',
         borderRadius: 30,
         borderColor: '#ffffff',

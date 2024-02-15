@@ -6,8 +6,9 @@ import {
 } from 'react-native';
 
 import { styles } from "./NavigationBar.style";
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from "@react-navigation/native";
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 
 
 export const NavigationBar = (props) => {
@@ -21,8 +22,7 @@ export const NavigationBar = (props) => {
                 <TouchableOpacity 
                     style={ styles.button }
                     onPress={() => {
-                        navigation.navigate('Home')
-                        console.log('home')
+                        navigation.navigate('Home')                    
                     }}
                 >
                     <Ionicons   
@@ -38,7 +38,6 @@ export const NavigationBar = (props) => {
                     style={ styles.button }
                     onPress={() => {
                         navigation.navigate('Favorites')
-                        console.log('favorites')
                     }}
                 >
                     <Ionicons   

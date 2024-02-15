@@ -2,9 +2,9 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     navigationBarContainer: {
-        backgroundColor: '#A32323',
-        borderTopWidth: 4,
-        borderColor: '#6C0D0D'
+        backgroundColor: '#801212',
+        borderTopWidth: 3,
+        borderColor: '#580707'
     },
     navigationBarMargin: {
         width: '90%',
