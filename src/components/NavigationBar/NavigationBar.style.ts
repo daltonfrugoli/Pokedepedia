@@ -15,7 +15,8 @@ export const styles = StyleSheet.create({
         marginBottom: 15
     },
     button: {
-        width: 180,
+        width: '45%',
+        maxWidth: 180,
         height: 40,
         backgroundColor: '#222222',
         justifyContent: 'center',
@@ -24,7 +25,8 @@ export const styles = StyleSheet.create({
     },
     buttonBack: {
         position: 'absolute', 
-        width: 180,
+        width: '45%',
+        maxWidth: 180,
         height: 45,
         backgroundColor: '#000000',
         justifyContent: 'center',
