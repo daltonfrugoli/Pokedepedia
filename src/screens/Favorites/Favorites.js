@@ -22,6 +22,7 @@ export function Favorites({navigation, route}) {
         favoritesPokemons()
     }, [])
 
+    // busca Pokemons favoritos no DB local
     const favoritesPokemons = () => {
         db.transaction((qr) => {
             qr.executeSql(
@@ -34,15 +35,13 @@ export function Favorites({navigation, route}) {
         })
     }
 
+    // renderiza os cards de tipo
     const renderType = ({item, index}) => {
 
-        var cor = item.type.name
-        
-
-
+        var typeName = item.type.name
         var typeColors = ''
 
-        switch (cor) {
+        switch (typeName) {
             case 'normal': 
                 typeColors = '#A7A7A7'
                 break;
@@ -71,7 +70,7 @@ export function Favorites({navigation, route}) {
                 typeColors = '#C955E6' 
                 break;
 
-            case 'eletric':
+            case 'electric':
                 typeColors = '#E7E31C'
                 break;
 
@@ -120,7 +119,6 @@ export function Favorites({navigation, route}) {
                 break;
         }
 
-
         return(
             <View style={{
                 borderRadius: 8,
@@ -137,14 +135,14 @@ export function Favorites({navigation, route}) {
                     fontSize: 19,
                     fontFamily: 'Bebas Neue',
                     color: '#000000'
-                }}>{cor}</Text>
+                }}>{typeName}</Text>
             </View>
         )
     }
 
+    // renderiza os cards completos dos pokemons favoritos
     const renderItem = ({item, index}) => {
 
-        var types = [item.typeMain, item.typeSecond]
         var convertType = JSON.parse(item.types)
 
         return(
@@ -153,19 +151,12 @@ export function Favorites({navigation, route}) {
                     <View style={{ alignItems: 'center', flex: 1 }}>
                         <Text style={ styles.tagNumberText }>#{item.orderNum}</Text>
                     </View>
-                    <View 
-                        style={{ 
-                            height: 20, 
-                            borderWidth: 2, 
-                            borderColor: 'white',
-                            position: 'absolute',
-                            right: '50%'
-                    }}/>
+                    <View style={ styles.tagDivLine }/>
                     <View style={{ alignItems: 'center', flex: 1 }}>
                         <Text style={ styles.tagNameText }>{item.name}</Text>
                     </View>
                 </View>
-                <View style={{ marginTop: 20, flexDirection: 'row', justifyContent: 'space-between', width: '85%', alignSelf: 'center' }}>
+                <View style={ styles.upperPropsRow }>
                     <View style={ styles.propsBox }>
                         <View style={ styles.propsDot }/>
                         <Text style={ styles.propsText }>WEIGHT: {item.weight}kg</Text>
@@ -175,7 +166,7 @@ export function Favorites({navigation, route}) {
                         <Text style={ styles.propsText }>HEIGHT: {item.height}m</Text>
                     </View>
                 </View>
-                <View style={{ marginTop: 15, marginBottom: 20, flexDirection: 'row', alignItems: 'center', width: '85%', alignSelf: 'center' }}>
+                <View style={ styles.underPropsRow }>
                     <View style={ styles.propsBox }>
                         <View style={ styles.propsDot }/>
                         <Text style={ styles.propsText }>Types:</Text>
@@ -198,20 +189,21 @@ export function Favorites({navigation, route}) {
             { pokemonsData.length < 1 ? <Header/> : null }
             <View style={{flex: 1}}>
                 {pokemonsData.length < 1? 
-                <View style={{width: '90%', alignSelf: 'center', marginTop: 25}}>
-                    <Text style={{ fontFamily: '04b', color: '#ffffff', fontSize: 30 }}>Oops...</Text>
-                    <Text style={{ color: '#ffffff', fontSize: 20, marginTop: 15 }}>No favorite Pokemon so far</Text>
-                </View>
+                    <View style={{width: '90%', alignSelf: 'center', marginTop: 25}}>
+                        <Text style={{ fontFamily: '04b', color: '#ffffff', fontSize: 30 }}>Oops...</Text>
+                        <Text style={{ color: '#ffffff', fontSize: 20, marginTop: 15 }}>No favorite Pokemon so far</Text>
+                    </View>
                 
                 :
-                <FlatList
-                    ListHeaderComponent={Header}
-                    contentContainerStyle = {{ paddingBottom: 100 }}
-                    data = {pokemonsData}
-                    keyExtractor = {item => item.id}
-                    renderItem = {renderItem}
-                    numColumns = {1}
-                />
+
+                    <FlatList
+                        ListHeaderComponent={Header}
+                        contentContainerStyle = {{ paddingBottom: 100 }}
+                        data = {pokemonsData}
+                        keyExtractor = {item => item.id}
+                        renderItem = {renderItem}
+                        numColumns = {1}
+                    />
                 }
             </View>
             <NavigationBar screen={ 'FAVORITES' }/>

@@ -20,9 +20,29 @@ export const styles = StyleSheet.create({
         borderWidth: 3,
         borderRadius: 10
     },
-    displayImage: {
-        width: '80%',
-        height: '100%'
+    displayImage: { 
+        height: 180, 
+        width: 180, 
+        position: 'absolute', 
+        top: 50, 
+        alignSelf:'center' 
+    },
+    displayOutline: { 
+        height: 205, 
+        width: '80%', 
+        position: 'absolute', 
+        top: 33, 
+        alignSelf: 'center', 
+        borderRadius: 10, 
+        borderColor: '#000000', 
+        borderWidth: 3 
+    },
+    underDisplayContainer: { 
+        height: 55, 
+        position: 'absolute', 
+        bottom: 25, 
+        width: '90%', 
+        alignSelf: 'center'
     },
     underDisplay: {
         width: '90%',
@@ -36,7 +56,8 @@ export const styles = StyleSheet.create({
         marginTop: 10,
         borderColor: '#000000',
         borderTopWidth: 3,
-        borderRadius: 10
+        borderRadius: 10,
+        marginLeft: 3
     },
     favButton: {
         backgroundColor: '#962222',
@@ -67,6 +88,13 @@ export const styles = StyleSheet.create({
         flexDirection: 'row', 
         position: "absolute"
     },
+    tagMidLiine: { 
+        height: 20, 
+        borderWidth: 2, 
+        borderColor: 'white',
+        position: 'absolute',
+        right: '50%'
+    },
     tagBack: {
         width: '90%',
         height: 70,
@@ -94,6 +122,19 @@ export const styles = StyleSheet.create({
         fontFamily: 'Bebas Neue',
         color: '#ffffff',
         fontSize: 28
+    },
+    upperPropsRow: { 
+        marginTop: 20, 
+        flexDirection: 'row', 
+        justifyContent: 'space-between', 
+        width: '85%', 
+        alignSelf: 'center' 
+    },
+    underPropsRow: { 
+        marginTop: 20, 
+        justifyContent: 'space-between', 
+        width: '85%', 
+        alignSelf: 'center' 
     },
     propsDot: {
         backgroundColor: '#ffffff',

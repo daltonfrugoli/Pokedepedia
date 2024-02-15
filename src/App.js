@@ -12,6 +12,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Home } from './screens/Home/Home.js'
 import { Overview } from './screens/Overview/Overview.js'
 import { Favorites } from './screens/Favorites/Favorites.js';
+import { Tutorial } from './screens/Tutorial/Tutorial.js'; 
 import SQLite from "react-native-sqlite-storage";
 
 
@@ -49,6 +50,7 @@ function App() {
           <Stack.Screen name='Home' component={ Home }/>
           <Stack.Screen name='Overview' component={ Overview }/>
           <Stack.Screen name='Favorites' component={ Favorites }/>
+          <Stack.Screen name='Tutorial' component={ Tutorial }/>
         </Stack.Navigator>
       </NavigationContainer>
   );

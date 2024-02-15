@@ -25,11 +25,30 @@ export const styles = StyleSheet.create({
         height: 105,
         marginTop: 20
     },
+    displayTextContainer: {
+        height: 205, 
+        width: '80%', 
+        position: 'absolute', 
+        top: 43, 
+        alignSelf: 'center', 
+        borderRadius: 10, 
+        borderColor: '#000000', 
+        borderWidth: 3
+    },
     displayText: {
-        fontFamily: '04b',
-        color: '#000000',
-        fontSize: 25,
+        color :'#000000', 
+        fontFamily: '04b', 
+        fontSize: 25, 
+        alignSelf: 'center', 
+        marginTop: 125, 
         marginLeft: 10
+    },
+    underDisplayContainer: {
+        height: 55, 
+        position: 'absolute', 
+        bottom: 15, 
+        width: '90%', 
+        alignSelf: 'center',
     },
     underDisplay: {
         width: '90%',
@@ -42,7 +61,8 @@ export const styles = StyleSheet.create({
         marginTop: 10,
         borderColor: '#000000',
         borderTopWidth: 3,
-        borderRadius: 10
+        borderRadius: 10,
+        marginLeft: 3
     },
     underButtonsContainer: {
         justifyContent: 'space-evenly'
@@ -51,6 +71,7 @@ export const styles = StyleSheet.create({
         width: 60,
         height: 15,
         marginTop: 8, 
+        marginRight: 3,
         backgroundColor: '#2FDB41',
         borderColor: '#000000',
         borderWidth: 2,
@@ -89,7 +110,6 @@ export const styles = StyleSheet.create({
     searchButton: {
         width: 70,
         height: 70,
-        backgroundColor: '#055DE1',
         borderRadius: 50,
         borderColor: '#ffffff',
         borderWidth: 3,
@@ -99,8 +119,7 @@ export const styles = StyleSheet.create({
         right: 0,
     },
     searchButtonIcon: {
-        color: '#ffffff',
-        fontSize: 40,
+        fontSize: 32,
     },
     modal: {
         width: 280,
@@ -130,5 +149,11 @@ export const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginTop: 5
+    },
+    networkStatus: {
+        color :'#ffffff',
+        marginTop: 5,
+        opacity: 0.8,
+        marginLeft: 2
     }
 })
