@@ -88,7 +88,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'row', 
         position: "absolute"
     },
-    tagMidLiine: { 
+    tagMidLine: { 
         height: 20, 
         borderWidth: 2, 
         borderColor: 'white',
