@@ -26,15 +26,4 @@ export async function GetPokenames(){
     }
 } 
 
-export async function GetPokeEvo(pokeId){
 
-    try{
-        const response = await api.get('evolution-chain/' + pokeId + '/')
-       
-        return response 
-    }
-
-    catch(error){
-        return error
-    }
-} 
