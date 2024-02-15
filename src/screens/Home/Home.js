@@ -7,17 +7,20 @@ import {
     Image,
     TouchableOpacity,
     ScrollView,
-    Alert
+    Alert,
+    FlatList
 } from "react-native";
 
 import { styles } from './Home.style';
 import { Header } from '../../components/Header/Header';
 import { NavigationBar } from '../../components/NavigationBar/NavigationBar';
 import { GetPokeInfo, GetPokenames } from "../../services/Https";
+import { useIsFocused } from '@react-navigation/native';
 import Spinner from "react-native-loading-spinner-overlay";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SelectDropdown from 'react-native-select-dropdown';
-import { useIsFocused } from '@react-navigation/native';
+import Modal from 'react-native-modal';
+
 
 
 export function Home({navigation, route}) {
@@ -27,6 +30,7 @@ export function Home({navigation, route}) {
     const [avaiablePokemonList, setAvaiablePokemonList] = useState([])
     const validationAlert = (titulo, texto) => Alert.alert(titulo, texto)
     const isFocused = useIsFocused()
+    const [modalIsVisible, setModalIsVisible] = useState(false)
 
     useEffect(() => {
         
@@ -46,14 +50,38 @@ export function Home({navigation, route}) {
         })
         
     }, [isFocused])
-    
 
 
+
+    const renderModal = () => (
+        
+        <Modal   
+            isVisible = {modalIsVisible}
+            onBackButtonPress = {() => {
+                setModalIsVisible(false)  
+            }}
+            onBackdropPress = {() => {
+                setModalIsVisible(false)
+            }}
+        >
+            <View style = {styles.modal}>
+                <Text style = {styles.modalTitle}>How to use Pokepedia</Text>
+                <Text style = {styles.modalText}>the best way to find out all about your favorite pokemons</Text>
+                <TouchableOpacity
+                    onPress={() => {
+                        setModalIsVisible(false) 
+                    }}
+                >
+                    <Text style = {styles.modalButtonText}>Ok</Text>
+                </TouchableOpacity>
+            </View>
+        </Modal>
+    )
 
     return(
         <SafeAreaView style={{ flex: 1, backgroundColor: '#D62A2A'}}>
             <ScrollView>
-                <Header modal={ true }/>
+                <Header modal={ true } renderModal={(visible) => setModalIsVisible(visible)}/>
                 <View style={ styles.displayContainer }>
                     <View style={ styles.display }>
                         <Image 
@@ -131,6 +159,7 @@ export function Home({navigation, route}) {
                 <View style={{ height: 20 }}/>
             </ScrollView>
             <NavigationBar screen={ 'HOME' }/>
+            {renderModal()}
             <Spinner visible={ spinnerIsVisible }/>
         </SafeAreaView>
     )

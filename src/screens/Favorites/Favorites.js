@@ -195,7 +195,7 @@ export function Favorites({navigation, route}) {
 
     return(
         <SafeAreaView style={{flex: 1, backgroundColor: '#D62A2A'}}>
-            <Header title = {'FAVORITES'}/>
+            { pokemonsData.length < 1 ? <Header/> : null }
             <View style={{flex: 1}}>
                 {pokemonsData.length < 1? 
                 <View style={{width: '90%', alignSelf: 'center', marginTop: 25}}>
@@ -205,6 +205,7 @@ export function Favorites({navigation, route}) {
                 
                 :
                 <FlatList
+                    ListHeaderComponent={Header}
                     contentContainerStyle = {{ paddingBottom: 100 }}
                     data = {pokemonsData}
                     keyExtractor = {item => item.id}

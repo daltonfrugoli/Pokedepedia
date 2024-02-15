@@ -101,5 +101,34 @@ export const styles = StyleSheet.create({
     searchButtonIcon: {
         color: '#ffffff',
         fontSize: 40,
+    },
+    modal: {
+        width: 280,
+        height: 145,
+        backgroundColor: '#A32323',
+        borderColor: '#ffffff',
+        borderWidth: 2,
+        borderRadius: 20,
+        alignSelf: 'center'
+    },
+    modalTitle: {
+        color: '#ffffff',
+        fontSize: 20,
+        fontWeight: 'bold',
+        alignSelf: 'center',
+        marginTop: 15
+    },
+    modalText: {
+        color: '#ffffff',
+        marginVertical: 15,
+        fontSize: 15,
+        alignSelf: 'center'
+    },
+    modalButtonText: {
+        color: '#ffffff',
+        alignSelf: 'center',
+        fontSize: 18,
+        fontWeight: 'bold',
+        marginTop: 5
     }
 })

@@ -7,14 +7,15 @@ import {
     TouchableOpacity,
     ScrollView,
     FlatList,
-    Dimensions
+    Dimensions,
+    Image
 } from "react-native"
 
-import { styles } from './Overview.style'
+import { styles } from './Overview.style';
 import { Header } from '../../components/Header/Header';
 import { NavigationBar } from '../../components/NavigationBar/NavigationBar';
 import { db } from "../../App.js";
-import { Canvas, Group, vec, Line, RoundedRect, LinearGradient, Image, useImage, ImageShader, BlurMask } from "@shopify/react-native-skia";
+import { Canvas, Group, vec, Line, RoundedRect, LinearGradient, useImage, ImageShader, BlurMask } from "@shopify/react-native-skia";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 
@@ -26,14 +27,13 @@ export function Overview({navigation, route}) {
 
     //imagem de fundo e front_default pokemon
     const landscape = useImage(require('../../assets/images/pokeLandscape.jpg'))
-    const pokePhotoLink = useImage(pokeInfo.sprites.front_default.toString())
-    const [pokePhoto, setPokePhoto] = useState()
-  
+    const pokePhoto = pokeInfo.sprites.front_default.toString()
+
     //botão de favoritos
     const [favorited, setFavorited] = useState()
 
     //Numeração do pokemon
-    const [formatNumber, setFormatNumber] = useState(pokeInfo.id.toString().padStart(4, '0'))
+    const formatNumber = pokeInfo.id.toString().padStart(4, '0')
     
     //variaveis que se atualizam com o valor da width e heigth da tela
     const windowDimensions = Dimensions.get('window');
@@ -44,8 +44,6 @@ export function Overview({navigation, route}) {
     });
 
     useEffect(() => {
-
-        setPokePhoto(pokePhotoLink)
 
         db.transaction((qr) => {
             qr.executeSql(
@@ -76,12 +74,12 @@ export function Overview({navigation, route}) {
 
     const renderItem = (item, index) => {
         
-        var cor = item.item.type.name
+        var typeName = item.item.type.name
 
 
         var typeColors = ''
 
-        switch (cor) {
+        switch (typeName) {
             case 'normal': 
                 typeColors = '#A7A7A7'
                 break;
@@ -187,7 +185,7 @@ export function Overview({navigation, route}) {
         <SafeAreaView style={{ flex: 1, backgroundColor: '#D62A2A', margin:0 }}>
             <ScrollView>
             <Header/>
-            <View style={{ height: 315}}> 
+            <View style={{ height: 315 }}> 
                 <View 
                     style={{ 
                         width: '100%',
@@ -231,12 +229,18 @@ export function Overview({navigation, route}) {
                                         rect={{ x: 0, y: 0, width: dimensions.window.width, height: 255 }}
                                     />
                                 </RoundedRect>
-                                <Image image={pokePhoto} y={40} fit="fitHeight" height={205} width={dimensions.window.width}></Image>
+                                
                             </Group>
                         </Group>
                     </Canvas>
                     <View style={{ height: 205, width: '80%', position: 'absolute', top: 43, alignSelf: 'center', borderRadius: 10, borderColor: '#000000', borderWidth: 3 }}/>
-
+                    <Image  
+                        source={{
+                            uri: pokePhoto,
+                        }}
+                        style={{ height: 180, width: 180, position: 'absolute', top: 50, alignSelf:'center' }}
+                        
+                    />
                     
                     <View style={{ height: 55, position: 'absolute', bottom: 15, width: '90%', alignSelf: 'center'}}>
                         <View style={ styles.underDisplay }>
@@ -272,6 +276,7 @@ export function Overview({navigation, route}) {
                                             }
                                         )
                                     })
+                                    
                                 }}
                             >
                                 <Ionicons style={[ styles.favIcon, { color: favorited? '#FFCD02' : '#ffffff' }]} name="star"/>
