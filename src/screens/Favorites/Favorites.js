@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import {
     SafeAreaView,
     View,
-    TouchableOpacity,
     Text,
     FlatList
 } from 'react-native'
@@ -17,7 +16,6 @@ export function Favorites({navigation, route}) {
 
     const [pokemonsData, setPokemonsData] = useState([])
     
-
     useEffect(() => {
         favoritesPokemons()
     }, [])
@@ -36,109 +34,54 @@ export function Favorites({navigation, route}) {
     }
 
     // renderiza os cards de tipo
-    const renderType = ({item, index}) => {
+    const TypeList = (list) => {
 
-        var typeName = item.type.name
-        var typeColors = ''
+        const typeColors = {
+            normal: '#A7A7A7',
+            grass: '#43C825',
+            fire: '#DF8110',
+            water: '#0C82B5',
+            flying: '#0FDA8D',
+            fighting: '#CF530C',
+            poison: '#C955E6',
+            electric: '#E7E31C',
+            ground: '#805F10',
+            rock: '#A4A70E',
+            psychic: '#FC528D',
+            ice: '#2FD1F1',
+            bug: '#359741',
+            ghost: '#B052AD',
+            steel: '#ABABAB',
+            dragon: '#FA5656',
+            dark: '#747474',
+            fairy: '#FF93E0'
+        };
 
-        switch (typeName) {
-            case 'normal': 
-                typeColors = '#A7A7A7'
-                break;
+        return list.map(item => {
 
-            case 'grass':
-                typeColors = '#43C825'
-                break;
-
-            case 'fire': 
-                typeColors = '#DF8110'
-                break;
-
-            case 'water':
-                typeColors = '#0C82B5'
-                break;
-
-            case 'flying':
-                typeColors = '#0FDA8D'
-                break;
-
-            case 'fighting':
-                typeColors = '#CF530C'
-                break;
-
-            case 'poison':
-                typeColors = '#C955E6' 
-                break;
-
-            case 'electric':
-                typeColors = '#E7E31C'
-                break;
-
-            case 'ground': 
-                typeColors = '#805F10'
-                break;
-
-            case 'rock':
-                typeColors = '#A4A70E'
-                break;
-
-            case 'psychic':
-                typeColors = '#FC528D'
-                break;
-
-            case 'ice':
-                typeColors = '#2FD1F1'
-                break;
-
-            case 'bug':
-                typeColors = '#359741'
-                break;
-
-            case 'ghost':
-                typeColors = '#B052AD'
-                break;
-
-            case 'steel':
-                typeColors = '#ABABAB'
-                break;
-
-            case 'dragon': 
-                typeColors = '#FA5656'
-                break
-
-            case 'dark': 
-                typeColors = '#747474'
-                break;
-
-            case 'fairy':
-                typeColors = '#FF93E0'
-                break;
-        
-            default:
-                typeColors = '#A7A7A7'
-                break;
-        }
-
-        return(
-            <View style={{
-                borderRadius: 8,
-                borderWidth: 2,
-                borderColor: '#000000',
-                alignItems: 'center',
-                justifyContent: 'center',
-                paddingHorizontal: 10,
-                paddingVertical: 2,
-                backgroundColor: typeColors,
-                marginRight: 15
-            }}>
-                <Text style={{
-                    fontSize: 19,
-                    fontFamily: 'Bebas Neue',
-                    color: '#000000'
-                }}>{typeName}</Text>
-            </View>
-        )
+            return (
+                <View key={item.type.name} style={{
+                    borderRadius: 8,
+                    borderWidth: 2,
+                    borderColor: '#000000',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    paddingHorizontal: 10,
+                    paddingVertical: 2,
+                    backgroundColor: typeColors[item.type.name] || '#A7A7A7',
+                    marginLeft: 5
+                }}>
+                    <Text style={{
+                        fontSize: 19,
+                        fontFamily: 'Bebas Neue',
+                        color: '#000000'
+                    }}>{item.type.name}</Text>
+                </View>
+            )
+        })
     }
+
+
 
     // renderiza os cards completos dos pokemons favoritos
     const renderItem = ({item, index}) => {
@@ -171,13 +114,7 @@ export function Favorites({navigation, route}) {
                         <View style={ styles.propsDot }/>
                         <Text style={ styles.propsText }>Types:</Text>
                     </View>
-                    <FlatList
-                        horizontal = {true}
-                        contentContainerStyle = {{ marginLeft: 10 }}
-                        data = {convertType}
-                        keyExtractor = {item => item.slot}
-                        renderItem = {renderType}
-                    />
+                    {TypeList(convertType)}
                 </View>  
             </View>
         )
