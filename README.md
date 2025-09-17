@@ -25,10 +25,13 @@ Aplicativo mobile desenvolvido em **React Native**, inspirado na famosa **Pokéd
 
 📸 Screenshots
 <p align="center">
-  <img src="./assets/readmeImages/home.jpeg" alt="Tela de Login" width="250"/>
-  <img src="./assets/readmeImages/overview.jpeg" alt="Tela Dashboard" width="250"/>
-  <img src="./assets/readmeImages/favorites.png" alt="Tela Notas" width="250"/>
-  <img src="./assets/readmeImages/help.jpeg" alt="Tela Notas" width="250"/>
+  <img src="./assets/readmeImages/home.jpeg" alt="Tela Inicial do app" width="220"/>
+  <img src="./assets/readmeImages/overview.jpeg" alt="Tela Com os detalhes do pokemon" width="220"/>
+</p>
+
+<p align="center">
+  <img src="./assets/readmeImages/favorites.jpeg" alt="Tela de listagem dos pokemons favoritados" width="220"/>
+  <img src="./assets/readmeImages/help.jpeg" alt="Tela de ajuda" width="220"/>
 </p>
 
 ---
