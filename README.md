@@ -1,7 +1,3 @@
-Boa, eu lembro desse projeto que você comentou 👌 (um app mobile tipo **Pokédex**, feito em **React Native e JavaScript**, que consome uma API com informações de Pokémon). Vamos estruturar um README legal pra ele:
-
----
-
 # 🔴 Poképedia
 
 Aplicativo mobile desenvolvido em **React Native**, inspirado na famosa **Pokédex**, que permite consultar informações completas sobre os Pokémon.
